@@ -1,0 +1,41 @@
+section.pages.login {
+	input {
+		&:invalid {
+		  box-shadow: none;
+		}
+
+		&:-moz-submit-invalid {
+		  box-shadow: none;
+		}
+
+		&:-moz-ui-invalid {
+		  box-shadow:none;
+		}
+	}
+
+	div.input {
+		height: 50px;
+		position: relative;
+		overflow: hidden;
+
+		p.error {
+			bottom: 10px;
+			color: #cc0000;
+			font-size: 12px;
+			margin: 0px;
+			opacity: 1;
+			position: absolute;
+		}
+
+		p.error.ng-hide-add.ng-hide-add-active,
+		p.error.ng-hide-remove.ng-hide-remove-active {
+		  -webkit-transition: opacity 1s, bottom 250ms;
+		  transition: opacity 1s, bottom 250ms;
+		}
+
+		p.error.ng-hide {
+		  opacity: 0;
+		  bottom: -10px;
+		}
+	}
+}
