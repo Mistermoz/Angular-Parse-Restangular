@@ -1,0 +1,6 @@
+/assets/css/*
+/assets/js/*
+/assets/fonts/fontawesome-webfont.*
+/libs/*
+/node_modules/*
+/.sass-cache/*

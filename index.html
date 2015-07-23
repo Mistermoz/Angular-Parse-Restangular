@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Boilerplate</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
+    <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+
+    <link href="assets/css/libs.css" rel="stylesheet" />
+    <link href="assets/css/main.css" rel="stylesheet" />
+
+    <script src="assets/js/libs.js"></script>
+    <script src="assets/js/main.js"></script>
+  </head>
+
+  <body>
+    <div class="main">
+      <ng-include src="'app/views/elements/header.html'"></ng-include>
+
+      <ng-view></ng-view>
+
+      <ng-include src="app/views/elements/footer.html"></ng-include>
+    </div>    
+  </body>
+</html>
