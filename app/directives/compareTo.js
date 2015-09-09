@@ -1,9 +1,9 @@
 (function (){
 	'use strict';
 
-	angular.module('app').directive('passVerify', PassVerifyDirective);
+	angular.module('app').directive('compareTo', compareTo);
 
-	function PassVerifyDirective () {
+	function compareTo () {
 		return {
       require: "ngModel",
       scope: {

@@ -3,13 +3,17 @@
 
 	<form ng-submit="register.submit(registerForm.$valid)" name="registerForm" novalidate>
 		<div class="input text">
-			<input type="text" name="name" ng-model="register.user.name" placeholder="Nombre">
+			<input type="text" name="name" ng-model="register.user.name" placeholder="Nombre" required minlength="3">
+			<p ng-show="registerForm.name.$error.required && registerForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+			<p ng-show="registerForm.name.$error.minlength && registerForm.name.$touched && registerForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
 		</div>
 		
 		<div class="input text">
-			<input type="text" name="empresa" ng-model="register.user.name" placeholder="Empresa">
+			<input type="text" name="company" ng-model="register.user.company" placeholder="Empresa" required minlength="3">
+			<p ng-show="registerForm.company.$error.required && registerForm.$submitted" class="error">Debes ingresar un empresa.</p>
+			<p ng-show="registerForm.company.$error.minlength && registerForm.company.$touched && registerForm.company.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
 		</div>
-
+	
 		<div class="select">
 			<select name="role" ng-init="register.user.role = 'suscriptor'; register.getBrands(register.user.role)" ng-model="register.user.role" ng-change="register.getBrands(register.user.role)">
 				<option value="administrador">Administrador</option>
@@ -20,19 +24,30 @@
 
 		<div class="brands" ng-show="register.user.role == 'suscriptor'">
 			<div class="brand" ng-repeat="(key, itembrand) in register.brands">
-				<input type="radio" name="brand" ng-model="register.user.brand" value="{{itembrand.name}}">
+				<input type="checkbox" name="brand" checklist-model="register.user.brands" checklist-value="itembrand.name">
 				<p>{{itembrand.name}}</p>
-			</div >
-		</div>
-		
-		<div class="input text">
-			<input type="text" name="username" ng-model="register.user.username" placeholder="Email">
+			</div>
+
+			<p ng-show="register.user.brands == null && registerForm.$submitted && register.user.role == 'suscriptor'" class="error">Debes ingresar una marca.</p>
 		</div>
 
+		<div class="input email">
+			<input type="email" name="email" ng-model="register.user.email" placeholder="Email" required minlength="3" email-validator>
+			<p ng-show="registerForm.email.$error.required && registerForm.$submitted" class="error">Debes ingresar un email.</p>
+			<p ng-show="registerForm.email.$error.emailValid && registerForm.$submitted" class="error">Debes ingresar un email válido.</p>
+			<p ng-show="registerForm.email.$error.minlength && registerForm.email.$touched && registerForm.email.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
 		<div class="input password">
-			<input type="password" name="password" ng-model="register.user.password" placeholder="Password">
+			<input type="password" name="password" ng-model="register.user.password" placeholder="Password" required minlength="3">
 
-			<input type="password" name="confirmPassword" ng-model="confirmPass" placeholder="Comfirm Password">
+			<input type="password" name="confirmPassword" ng-model="register.confirmPassword" placeholder="Comfirm Password" required compare-to="register.user.password">
 		</div>
+		<p ng-show="registerForm.password.$error.required && registerForm.$submitted" class="error">Debes ingresar un password.</p>
+
+		<p ng-show="registerForm.confirmPassword.$error.required && registerForm.$submitted" class="error">Debes confirmar tú password.</p>
+		<p ng-show="registerForm.confirmPassword.$error.compareTo && registerForm.confirmPassword.$touched" class="error">Las contraseñas no coinciden.</p>
+		<p ng-show="registerForm.password.$error.minlength && registerForm.password.$touched && registerForm.password.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+	
+		<input type="submit" value="Enviar">
 	</form>
 </section>
