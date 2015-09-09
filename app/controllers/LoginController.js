@@ -18,6 +18,7 @@
 				Restangular.all('login').get(params, {}, {"Content-Type": "application/json; charset=utf-8"}).then(function (user) {
 					$cookies.put('login', user.sessionToken + '&' + user.objectId);
 					$rootScope.name = user.name;
+					$rootScope.login = true;
 
 					$location.path('/');
 				}, function (response) {

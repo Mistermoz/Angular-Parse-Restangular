@@ -28,10 +28,13 @@ module.exports = function (grunt) {
         'libs/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'libs/angular-bootstrap/ui-bootstrap.min.js',
         'libs/restangular/dist/restangular.min.js',
-        'libs/lodash/dist/lodash.min.js'
+        'libs/lodash/dist/lodash.min.js',
+        'libs/checklist-model/checklist-model.js',
+        'libs/ng-img-crop/compile/minified/ng-img-crop.js'
       ],
       css: [
-        'libs/font-awesome/css/font-awesome.min.css'
+        'libs/font-awesome/css/font-awesome.min.css',
+        'libs/ng-img-crop/compile/minified/ng-img-crop.css'
       ]
     },
 

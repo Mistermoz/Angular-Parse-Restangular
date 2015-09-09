@@ -1,0 +1,25 @@
+<h1>Agregar Clientes</h1>
+<style>
+    .cropArea {
+      background: #E4E4E4;
+      overflow: hidden;
+      width:500px;
+      height:350px;
+    }
+  </style>
+<form ng-submit="brands.add()" ng-init="brands.initAdd()">
+	<div class="input text">
+		<input type="text" placeholder="Name">
+	</div>
+
+	<div class="input file">
+		<div>Elegir imagen cliente (Marca): <input type="file" id="fileInput" /></div>
+
+		<div class="cropArea">
+	    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+	  </div>
+
+	  <div>Cropped Image:</div>
+	  	<div><img ng-src="{{myCroppedImage}}" /></div>
+		</div>
+</form>

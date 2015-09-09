@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate'])
+	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate', 'checklist-model', 'ngImgCrop'])
 	.config(function ($routeProvider, RestangularProvider, PARSE) {
 		$routeProvider
 			.when('/', {
@@ -19,6 +19,16 @@
 				templateUrl: 'app/views/register.html',
 				controller: 'RegisterController',
 				controllerAs: 'register'
+			})
+			.when('/brands/add', {
+				templateUrl: 'app/views/brands/add.html',
+				controller: 'BrandsController',
+				controllerAs: 'brands'
+			})
+			.when('/brands', {
+				templateUrl: 'app/views/brands/index.html',
+				controller: 'BrandsController',
+				controllerAs: 'brands'
 			});
 		RestangularProvider
 			.setBaseUrl('https://api.parse.com/1')
@@ -34,5 +44,10 @@
 
 				return data;
 			});
+	})
+	.run(function ($location, $rootScope, stateLogin) {
+		$rootScope.$on('$routeChangeStart', function(next, current) {
+			stateLogin.state();
+		});
 	});
 })();

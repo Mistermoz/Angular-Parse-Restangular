@@ -1,3 +1,7 @@
-<header>
+<header ng-controller="HeaderController as header">
 	<h1>Asteroid</h1>
+
+	<h2 ng-show="login" >{{name}}</h2>
+		
+	<button ng-click="header.logout()" ng-show="login">Logout</button>
 </header>
