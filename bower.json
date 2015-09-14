@@ -12,6 +12,7 @@
     "font-awesome": "~4.2.0",
     "neat": "~1.7.1",
     "ng-img-crop": "ngImgCrop#~0.3.2",
+    "ngSweetAlert": "angular-sweetalert#~1.1.0",
     "restangular": "~1.4.0"
   }
 }

@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate', 'checklist-model', 'ngImgCrop'])
+	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate', 'checklist-model', 'ngImgCrop', 'oitozero.ngSweetAlert'])
 	.config(function ($routeProvider, RestangularProvider, PARSE) {
 		$routeProvider
 			.when('/', {
@@ -22,6 +22,11 @@
 			})
 			.when('/brands/add', {
 				templateUrl: 'app/views/brands/add.html',
+				controller: 'BrandsController',
+				controllerAs: 'brands'
+			})
+			.when('/brands/view', {
+				templateUrl: 'app/views/brands/view.html',
 				controller: 'BrandsController',
 				controllerAs: 'brands'
 			})

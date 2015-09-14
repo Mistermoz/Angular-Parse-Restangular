@@ -3,10 +3,11 @@
 <ul>
 	<li ng-repeat="brand in brands.allBrands">
 		<p>{{brand.name}}</p>
-		<p><a href="/#/brands/view">Ver y Editar</a></p>
-		<p><a href="/#/brands/view">Eliminar</a></p>
+		<p>{{brand.description}}</p>
+		<p><img ng-src="{{brand.image.name}}" alt=""></p>
+		<p><a href="/#/brands/ver" ng-click="brands.verBrand($event, brand.objectId)">Ver y Editar</a></p>
+		<p><a href="/#/brands/eliminar" ng-click="brands.delete($event, brand.objectId, $index)">Eliminar</a></p>
 	</li>
-
 
 	<a href="/#/brands/add">Agregar Cliente</a>
 </ul>

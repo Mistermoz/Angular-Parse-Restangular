@@ -30,11 +30,14 @@ module.exports = function (grunt) {
         'libs/restangular/dist/restangular.min.js',
         'libs/lodash/dist/lodash.min.js',
         'libs/checklist-model/checklist-model.js',
-        'libs/ng-img-crop/compile/minified/ng-img-crop.js'
+        'libs/ng-img-crop/compile/minified/ng-img-crop.js',
+        'libs/sweetalert/dist/sweetalert.min.js',
+        'libs/ngSweetAlert/SweetAlert.min.js'
       ],
       css: [
         'libs/font-awesome/css/font-awesome.min.css',
-        'libs/ng-img-crop/compile/minified/ng-img-crop.css'
+        'libs/ng-img-crop/compile/minified/ng-img-crop.css',
+        'libs/sweetalert/dist/sweetalert.css'
       ]
     },
 
