@@ -1,0 +1,54 @@
+<section class="pages user add">
+	<button back>Volver</button>
+	<h1>Agregar usuario</h1>
+
+	<form ng-submit="users.add(usersForm.$valid)" name="usersForm" novalidate>
+		<div class="input text">
+			<input type="text" name="name" ng-model="users.user.name" placeholder="Nombre" required minlength="3">
+			<p ng-show="usersForm.name.$error.required && usersForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+			<p ng-show="usersForm.name.$error.minlength && usersForm.name.$touched && usersForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+		
+		<div class="input text">
+			<input type="text" name="company" ng-model="users.user.company" placeholder="Empresa" required minlength="3">
+			<p ng-show="usersForm.company.$error.required && usersForm.$submitted" class="error">Debes ingresar un empresa.</p>
+			<p ng-show="usersForm.company.$error.minlength && usersForm.company.$touched && usersForm.company.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+	
+		<div class="select">
+			<select name="role" ng-init="users.user.role = 'suscriptor'; users.getBrands(users.user.role)" ng-model="users.user.role" ng-change="users.getBrands(users.user.role)">
+				<option value="administrador">Administrador</option>
+				<option value="suscriptor">Suscriptor</option>
+				<option value="editor">Editor</option>
+			</select>
+		</div>
+
+		<div class="brands" ng-show="users.user.role == 'suscriptor'">
+			<div class="brand" ng-repeat="(key, itembrand) in users.brands">
+				<input type="checkbox" name="brand" checklist-model="users.user.brands" checklist-value="itembrand.name">
+				<p>{{itembrand.name}}</p>
+			</div>
+
+			<p ng-show="users.user.brands == null && usersForm.$submitted && users.user.role == 'suscriptor'" class="error">Debes ingresar una marca.</p>
+		</div>
+
+		<div class="input email">
+			<input type="email" name="email" ng-model="users.user.email" placeholder="Email" required minlength="3" email-validator>
+			<p ng-show="usersForm.email.$error.required && usersForm.$submitted" class="error">Debes ingresar un email.</p>
+			<p ng-show="usersForm.email.$error.emailValid && usersForm.$submitted" class="error">Debes ingresar un email válido.</p>
+			<p ng-show="usersForm.email.$error.minlength && usersForm.email.$touched && usersForm.email.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+		<div class="input password">
+			<input type="password" name="password" ng-model="users.user.password" placeholder="Password" required minlength="3">
+
+			<input type="password" name="confirmPassword" ng-model="users.confirmPassword" placeholder="Comfirm Password" required compare-to="users.user.password">
+		</div>
+		<p ng-show="usersForm.password.$error.required && usersForm.$submitted" class="error">Debes ingresar un password.</p>
+
+		<p ng-show="usersForm.confirmPassword.$error.required && usersForm.$submitted" class="error">Debes confirmar tú password.</p>
+		<p ng-show="usersForm.confirmPassword.$error.compareTo && usersForm.confirmPassword.$touched" class="error">Las contraseñas no coinciden.</p>
+		<p ng-show="usersForm.password.$error.minlength && usersForm.password.$touched && usersForm.password.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+	
+		<input type="submit" value="Enviar">
+	</form>
+</section>

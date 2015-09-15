@@ -6,9 +6,16 @@
   "libs/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
 
 // SMACSS
+//Base
+
+@import
+  "base/config",
+	"base/loader",
+	"base/sprites";
 // Layout
 @import
-	"layout/header";
+	"layout/header",
+	"layout/default";
 
 // Modules
 @import

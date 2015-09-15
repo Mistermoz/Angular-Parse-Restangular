@@ -2,12 +2,8 @@
 	'use strict';
 
 	angular.module('app').controller('BrandsController', BrandsController);
-	function BrandsController (BrandModel, $scope, Restangular, $http, $rootScope, $location, SweetAlert) {
+	function BrandsController (BrandModel, $scope, Restangular, $http, $rootScope, $location, SweetAlert, $routeParams) {
 		var that = this;
-
-		BrandModel.getList().then(function (brands) {
-			that.allBrands = brands;
-		});
 
     $scope.myImage='';
     $scope.myCroppedImage='';
@@ -26,12 +22,22 @@
 
     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
+    if($location.path() == '/brands') {
+      BrandModel.getList().then(function (brands) {
+        that.allBrands = brands;
+        $rootScope.isLoading = false;
+      });
+    }
+
     if($location.path() == '/brands/add') {
       that.name = '';
       that.description = '';
+      that.showView = true;
+      $rootScope.isLoading = false;
 
       that.add = function () {
         var that = this, fd = '';
+        $rootScope.isLoading = true;
 
         var img =  $scope.myCroppedImage.replace(/^data:image\/(png|jpeg);base64,/, '');
 
@@ -41,27 +47,33 @@
           var newBrand = {"name": that.name, "description": that.description, image: {"name": response.url, "__type": "File"}, createdBy: $rootScope.name};
           BrandModel.post(newBrand).then(function (brand) {
             $location.path('/brands');
+            $rootScope.isLoading = false;
           }, function (error) {
             console.log(error);
+            $rootScope.isLoading = false;
           });
         }, function (error) {
           console.log(error);
+          $rootScope.isLoading = false;
         });
       };
     }
 
-    if($location.path() == '/brands/view') {
+    if($location.path().indexOf("/brands/view") > -1 ) {
       that.view = {};
       that.editImage = false;
 
-      BrandModel.one($rootScope.brandId).get().then(function (brandObejct) {
+      BrandModel.one($routeParams.objId).get().then(function (brandObejct) {
         that.view = brandObejct;
         that.showView = true;
+        $rootScope.isLoading = false;
       }, function (error) {
         console.log(error);
       });
 
       that.edit = function () {
+        $rootScope.isLoading = true;
+
         if(that.editImage && $scope.myCroppedImage !== '') {
           var img =  $scope.myCroppedImage.replace(/^data:image\/(png|jpeg);base64,/, ''), fd = '';
 
@@ -73,16 +85,21 @@
               $scope.myCroppedImage = '';
               $scope.myImage = '';
               that.editImage = false;
+              $rootScope.isLoading = false;
             }, function (error) {
               console.log(error);
+              $rootScope.isLoading = false;
             });
           }, function (error) {
             console.log(error);
+            $rootScope.isLoading = false;
           });
         }else {
             that.view.put().then(function (rsp) {
               console.log(rsp);
+              $rootScope.isLoading = false;
           }, function (error) {
+            $rootScope.isLoading = false;
             console.log(error);
           });
         }
@@ -114,10 +131,10 @@
       e.preventDefault();
     };
 
-    that.verBrand = function (e, id) {
-      $rootScope.brandId = id;
+    that.verBrand = function (e, objId) {
+      $rootScope.isLoading = true;
 
-      $location.path('/brands/view');
+      $location.path('/brands/view/' + objId);
       e.preventDefault();
     };
 	}

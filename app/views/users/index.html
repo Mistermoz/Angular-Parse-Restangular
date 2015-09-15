@@ -1,0 +1,13 @@
+<h1>Usuarios</h1>
+
+<ul>
+	<li ng-repeat="user in users.allUsers">
+		<p>{{user.name}}</p>
+		<p>{{user.email}}</p>
+		<p><img ng-src="{{user.image.name}}" alt=""></p>
+		<p><a href="/#/users/ver" ng-click="users.verUser($event, user.objectId)">Ver y Editar</a></p>
+		<p><a href="/#/users/eliminar" ng-click="users.delete($event, user.objectId, $index)">Eliminar</a></p>
+	</li>
+
+	<a href="/#/users/add">Agregar Usuario</a>
+</ul>

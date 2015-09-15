@@ -15,17 +15,12 @@
 				controller: 'LoginController',
 				controllerAs: 'login'
 			})
-			.when('/registro', {
-				templateUrl: 'app/views/register.html',
-				controller: 'RegisterController',
-				controllerAs: 'register'
-			})
 			.when('/brands/add', {
 				templateUrl: 'app/views/brands/add.html',
 				controller: 'BrandsController',
 				controllerAs: 'brands'
 			})
-			.when('/brands/view', {
+			.when('/brands/view/:objId', {
 				templateUrl: 'app/views/brands/view.html',
 				controller: 'BrandsController',
 				controllerAs: 'brands'
@@ -34,6 +29,21 @@
 				templateUrl: 'app/views/brands/index.html',
 				controller: 'BrandsController',
 				controllerAs: 'brands'
+			})
+			.when('/users', {
+				templateUrl: 'app/views/users/index.html',
+				controller: 'UsersController',
+				controllerAs: 'users'
+			})
+			.when('/users/add', {
+				templateUrl: 'app/views/users/add.html',
+				controller: 'UsersController',
+				controllerAs: 'users'
+			})
+			.when('/users/view/:objId', {
+				templateUrl: 'app/views/users/view.html',
+				controller: 'UsersController',
+				controllerAs: 'users'
 			});
 		RestangularProvider
 			.setBaseUrl('https://api.parse.com/1')
@@ -51,6 +61,8 @@
 			});
 	})
 	.run(function ($location, $rootScope, stateLogin) {
+		$rootScope.isLoading = true;
+		
 		$rootScope.$on('$routeChangeStart', function(next, current) {
 			stateLogin.state();
 		});

@@ -23,6 +23,8 @@
       <ng-view></ng-view>
 
       <ng-include src="app/views/elements/footer.html"></ng-include>
-    </div>    
+    </div>
+
+    <ng-include src="'app/views/elements/loader.html'" ng-show="isLoading"></ng-include>    
   </body>
 </html>

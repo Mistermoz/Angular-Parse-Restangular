@@ -5,5 +5,7 @@
 
 	function HomeController(UserModel, $cookies, $location, $rootScope, Restangular) {
 		var that = this;
+
+		$rootScope.isLoading = false;
 	}
 })();
