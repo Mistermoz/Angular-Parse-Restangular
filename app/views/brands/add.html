@@ -1,31 +1,38 @@
-<h1>Agregar Clientes</h1>
-<style>
-    .cropArea {
-      background: #E4E4E4;
-      overflow: hidden;
-      width:500px;
-      height:350px;
-    }
-  </style>
-<button back>Volver</button>
-<form ng-init="brands.initAdd()">
-	<div class="input text">
-		<input type="text" placeholder="Nombre" ng-model="brands.name">
-	</div>
+<div class="brands add">
+	<h1>Agregar Clientes</h1>
+	<style>
+	    .cropArea {
+	      background: #E4E4E4;
+	      overflow: hidden;
+	      width:500px;
+	      height:350px;
+	    }
+	  </style>
+	<button back>Volver</button>
+	<form name="brandAddForm" ng-submit="brands.add(brandAddForm.$valid)" novalidate>
+		<div class="input text">
+			<input type="text" placeholder="Nombre" ng-model="brands.brandAdd.name" name="name" required minlength="3">
+			<p ng-show="brandAddForm.name.$error.required && brandAddForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+			<p ng-show="brandAddForm.name.$error.minlength && brandAddForm.name.$touched && brandAddForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
 
-	<div class="input text">
-		<input type="text" placeholder="Descripción" ng-model="brands.description">
-	</div>
+		<div class="input text">
+			<input type="text" placeholder="Descripción" ng-model="brands.brandAdd.description" name="description" required minlength="3">
+			<p ng-show="brandAddForm.description.$error.required && brandAddForm.$submitted" class="error">Debes ingresar una Descripción.</p>
+			<p ng-show="brandAddForm.description.$error.minlength && brandAddForm.description.$touched && brandAddForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
 
-	<div class="input file">
-		<div>Elegir imagen cliente (Marca): <input type="file" id="fileInput" /></div>
+		<div class="input file">
+			<div>Elegir imagen cliente (Marca): <input type="file" id="fileInput" name="img" valid-file ng-model="projects.proj.img" required/></div>
+			<p ng-show="brandAddForm.img.$error.required && brandAddForm.$submitted" class="error">Debes ingresar una imagen.</p>
+			
+			<div class="cropArea">
+		    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+		  </div>
+		  
+		  <div><img ng-src="{{myCroppedImage}}" /></div>
+		</div>
 
-		<div class="cropArea">
-	    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-	  </div>
-	  
-	  <div><img ng-src="{{myCroppedImage}}" /></div>
-	</div>
-
-		<button ng-click="brands.add()">Add</button>
-</form>
+			<input type="submit" value="Add"/>
+	</form>
+</div>

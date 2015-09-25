@@ -9,28 +9,34 @@
 	    height:350px;
 	  }
 	</style>
-	<div class="thumb">
-		<img ng-src="{{brands.view.image.name}}" alt="">
-		<button ng-click="brands.editImage = true">Cambiar imagen</button>
-	</div>
+	<form name="brandViewForm" ng-submit="brands.edit(brandViewForm.$valid)" novalidate>
+		<div class="input text">
+			<input type="text" placeholder="Nombre" ng-model="brands.brandView.name" name="name" required minlength="3">
+				<p ng-show="brandViewForm.name.$error.required && brandViewForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+				<p ng-show="brandViewForm.name.$error.minlength && brandViewForm.name.$touched && brandViewForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
 
-	<div class="input file" ng-show="brands.editImage">
-		<div>Elegir imagen cliente (Marca): <input type="file" id="fileInput" /></div>
+		<div class="input text">
+			<input type="text" placeholder="Descripción" ng-model="brands.brandView.description" name="description" required minlength="3">
+				<p ng-show="brandViewForm.description.$error.required && brandViewForm.$submitted" class="error">Debes ingresar una Descripción.</p>
+				<p ng-show="brandViewForm.description.$error.minlength && brandViewForm.description.$touched && brandViewForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
 
-		<div class="cropArea">
-	    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-	  </div>
-	  
-	  <div><img ng-src="{{myCroppedImage}}" /></div>
-	</div>
+		<div class="thumb">
+			<img ng-src="{{brands.brandView.image.name}}" alt="">
+			<button ng-click="brands.editImage = true; $event.preventDefault();">Cambiar imagen</button>
+		</div>
 
-	<div class="input text">
-		<input type="text" Placeholder="Nombre" ng-model="brands.view.name">
-	</div>
+		<div class="input file" ng-show="brands.editImage">
+			<div>Elegir imagen cliente (Marca): <input type="file" id="fileInput" /></div>
 
-	<div class="input text">
-		<input type="text" Placeholder="Descripción" ng-model="brands.view.description">
-	</div>
+			<div class="cropArea">
+		    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+		  </div>
+		  
+		  <div><img ng-src="{{myCroppedImage}}" /></div>
+		</div>
 
-	<button ng-click="brands.edit()">Editar</button>
+		<input type="submit" value="Editar" />
+	</form>
 </div>
