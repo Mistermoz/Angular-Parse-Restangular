@@ -8,10 +8,10 @@
 			<div class="boxIframe" style="width:{{banner.width -10 }}px; height: {{banner.height - 10 }}px; overflow: hidden;">
 				<iframe ng-src="{{banner.folder}}" hspace="0" vspace="0" frameBorder="0" scrolling="no" style="width:{{banner.width}}px; height: {{banner.height}}px; border:0; margin-top: -10px; margin-left: -10px"></iframe>
 			</div>
-			<p><a href="/#/banners/view/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/{{banner.description}}/id/{{banner.objectId}}" ng-click="banners.verBrand($event, banner.objectId)">Ver y Editar</a></p>
-			<p><a href="/#/banners/eliminar" ng-click="banners.delete($event, banner.objectId, $index)">Eliminar</a></p>
+			<p ng-show="role == 'administrador'"><a href="/#/banners/view/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/{{banner.description}}/id/{{banner.objectId}}" ng-click="banners.verBrand($event, banner.objectId)">Ver y Editar</a></p>
+			<p ng-show="role == 'administrador'"><a href="/#/banners/eliminar" ng-click="banners.delete($event, banner.objectId, $index)">Eliminar</a></p>
 		</li>
 
-		<a href="/#/banners/add/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/id/{{banners.medioId}}">Agregar banner</a>
+		<a href="/#/banners/add/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/id/{{banners.medioId}}" ng-show="role == 'administrador'">Agregar banner</a>
 	</ul>
 </div>

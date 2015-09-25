@@ -1,6 +1,17 @@
 <header ng-controller="HeaderController as header">
 	<h1>Asteroid</h1>
 
+	<nav>
+		<ul>
+			<li><a href="/#/">Home</a></li>
+			<li><a href="/#/brands">Clientes</a></li>
+<!-- 			<li><a href="/#/projects/list">Projectos</a></li>
+			<li><a href="/#/medios/list">Medios</a></li>
+			<li><a href="/#/banners/list">Banners</a></li> -->
+			<li><a href="/#/users">Usuarios</a></li>
+		</ul>
+	</nav>
+
 	<h2 ng-show="login" >{{name}}</h2>
 		
 	<button ng-click="header.logout()" ng-show="login">Logout</button>

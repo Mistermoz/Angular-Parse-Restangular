@@ -16,6 +16,7 @@
 	<form name="bannerForm" ng-submit="banners.add(bannerForm.$valid)" novalidate>
 		<div class="input text">
 			<input type="text" placeholder="Descripción" ng-model="banners.bannerAdd.description" name="description" required ng-change="banners.descriptionKeyUp()">
+			<label for="descriptiom">Tamaño banner ejemplo: 800x600</label>
 			<p ng-show="bannerForm.description.$error.required && bannerForm.$submitted" class="error">Debes ingresar una descripción.</p>
 			<p ng-show="bannerForm.description.$error.minlength && bannerForm.description.$touched && bannerForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
 		</div>
@@ -23,7 +24,7 @@
 		<div class="input file">
 			<div flow-init="{target: '/assets/php/upload.php'}" flow-files-submitted="$flow.upload()" flow-file-success="banners.getFolder($message);">
 
-			  <span class="btn" flow-btn><i class="icon icon-file"></i>Upload File</span>
+			  <button class="btn" flow-btn style="cursor: pointer;"><i class="icon icon-file"></i>Subir Banner (zip)</button>
 
 			  <input type="hidden" ng-model="banners.bannerAdd.folder" required>
 			</div>

@@ -7,12 +7,12 @@
 			<p>{{medio.name}}</p>
 			<p>{{medio.description}}</p>
 			<p><img ng-src="{{medio.image.name}}" alt=""></p>
-			<p><a href="/#/medios/view/{{medios.brand}}/{{medios.project}}/{{medio.name}}/id/{{medio.objectId}}" ng-click="medios.verBrand($event, medio.objectId)">Ver y Editar</a></p>
-			<p><a href="/#/medios/eliminar" ng-click="medios.delete($event, medio.objectId, $index)">Eliminar</a></p>
+			<p ng-show="role == 'administrador'"><a href="/#/medios/view/{{medios.brand}}/{{medios.project}}/{{medio.name}}/id/{{medio.objectId}}" ng-click="medios.verBrand($event, medio.objectId)">Ver y Editar</a></p>
+			<p ng-show="role == 'administrador'"><a href="/#/medios/eliminar" ng-click="medios.delete($event, medio.objectId, $index)">Eliminar</a></p>
 
 			<p><a href="/#/banners/{{medios.brand}}/id/{{medios.brandId}}/{{medios.project}}/id/{{medios.projectId}}/{{medio.name}}/id/{{medio.objectId}}">Banners de {{medio.name}}</a></p>
 		</li>
 
-		<a href="/#/medios/add/{{medios.brand}}/{{medios.project}}/id/{{medios.projectId}}">Agregar medio</a>
+		<a href="/#/medios/add/{{medios.brand}}/{{medios.project}}/id/{{medios.projectId}}" ng-show="role == 'administrador'">Agregar medio</a>
 	</ul>
 </div>

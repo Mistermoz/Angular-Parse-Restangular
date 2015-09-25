@@ -118,7 +118,11 @@
 		that.getFolder = function (message) {
 			var that = this, messageJSON = JSON.parse(message);
 
-			that.bannerView.folder = 'assets/files/' + messageJSON.folder + '/' + that.bannerView.description + '.html';
+			if($location.path().indexOf("/banners/view") > -1)  {
+				that.bannerView.folder = 'assets/files/' + messageJSON.folder + '/' + that.bannerView.description + '.html';
+			}else {
+				that.bannerAdd.folder = 'assets/files/' + messageJSON.folder + '/' + that.bannerAdd.description + '.html';
+			}
 		};
 
 		that.delete = function (e, obj, idx) {

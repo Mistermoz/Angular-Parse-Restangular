@@ -16,6 +16,11 @@
 						var data = $cookies.get('login').split('&');
 						Restangular.all('users/me').customGET(false,false, {"X-Parse-Session-Token": "" + data[0] + ""}).then(function (user) {
 				      $rootScope.name = user.name;
+				      $rootScope.role = user.role;
+				      if(user.role === 'suscriptor') {
+				      	$rootScope.Userbrands = user.brands;
+				      }
+
 				      $rootScope.login = true;
 				      
 				      if($location.path() == '/login') {
@@ -42,6 +47,8 @@
 					$cookies.remove('login');
 					$rootScope.login = false;
 					$rootScope.name = '';
+					$rootScope.role = '';
+					$rootScope.Userbrands = [];
 					$location.path('/login');
 
 				}, function (response) {

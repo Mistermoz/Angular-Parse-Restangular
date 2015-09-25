@@ -7,6 +7,7 @@
 
     $scope.myImage='';
     $scope.myCroppedImage='';
+    that.allBrands = [];
 
     var handleFileSelect = function(evt) {
 
@@ -24,7 +25,18 @@
 
     if($location.path() == '/brands') {
       BrandModel.getList().then(function (brands) {
-        that.allBrands = brands;
+        if($rootScope.role === 'administrador') {
+          that.allBrands = brands;
+        }else {
+          angular.forEach(brands, function (brand, key1) {
+            angular.forEach($rootScope.Userbrands , function (userBrand, key2) {
+              if(brand.name === userBrand) {
+                that.allBrands.push(brand);
+              }
+            });
+          });
+        }
+        
         $rootScope.isLoading = false;
       });
     }
