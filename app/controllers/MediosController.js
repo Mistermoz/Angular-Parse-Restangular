@@ -150,7 +150,7 @@
         if(response) {
           MedioModel.one(obj).remove().then(function (response) {
             that.allMedios.splice(idx, 1);
-            SweetAlert.swal("Projecto Borrado exitosamente.");
+            SweetAlert.swal("Medio Borrado exitosamente.");
           }, function (error) {
             console.log(error);
           });

@@ -1,0 +1,38 @@
+<div class="banners add">
+	<h1>Agregar Banner a {{banners.medio}}</h1>
+	<style>
+	    .cropArea {
+	      background: #E4E4E4;
+	      overflow: hidden;
+	      width:500px;
+	      height:350px;
+	    }
+
+	    iframe {
+	    	overflow: hidden;
+	    }
+	  </style>
+	<button back>Volver</button>
+	<form name="bannerForm" ng-submit="banners.add(bannerForm.$valid)" novalidate>
+		<div class="input text">
+			<input type="text" placeholder="Descripción" ng-model="banners.bannerAdd.description" name="description" required ng-change="banners.descriptionKeyUp()">
+			<p ng-show="bannerForm.description.$error.required && bannerForm.$submitted" class="error">Debes ingresar una descripción.</p>
+			<p ng-show="bannerForm.description.$error.minlength && bannerForm.description.$touched && bannerForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+
+		<div class="input file">
+			<div flow-init="{target: '/assets/php/upload.php'}" flow-files-submitted="$flow.upload()" flow-file-success="banners.getFolder($message);">
+
+			  <span class="btn" flow-btn><i class="icon icon-file"></i>Upload File</span>
+
+			  <input type="hidden" ng-model="banners.bannerAdd.folder" required>
+			</div>
+		</div>
+		
+		<div class="iframeBox" style="width:{{banners.bWidth -10 }}px; height: {{banners.bHeight - 10 }}px; overflow: hidden;">
+			<iframe ng-src="{{banners.bannerAdd.folder}}" hspace="0" vspace="0" frameBorder="0" scrolling="no" style="width:{{banners.bWidth}}px; height: {{banners.bHeight}}px; border:0; margin-top: -10px; margin-left: -10px"></iframe>
+		</div>
+
+		<input type="submit" value="Add">
+	</form>
+</div>

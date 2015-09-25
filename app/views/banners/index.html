@@ -1,0 +1,17 @@
+<div class="banners index" ng-init="banners.index = true">
+	<h1>Banners de {{banners.medio}}</h1>
+
+	<a href="/#/medios/{{banners.brand}}/id/{{banners.brandId}}/{{banners.project}}/id/{{banners.projectId}}">Volver</a>
+	<ul>
+		<li ng-repeat="banner in banners.allBanners">
+			<p>{{banner.description}}</p>
+			<div class="boxIframe" style="width:{{banner.width -10 }}px; height: {{banner.height - 10 }}px; overflow: hidden;">
+				<iframe ng-src="{{banner.folder}}" hspace="0" vspace="0" frameBorder="0" scrolling="no" style="width:{{banner.width}}px; height: {{banner.height}}px; border:0; margin-top: -10px; margin-left: -10px"></iframe>
+			</div>
+			<p><a href="/#/banners/view/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/{{banner.description}}/id/{{banner.objectId}}" ng-click="banners.verBrand($event, banner.objectId)">Ver y Editar</a></p>
+			<p><a href="/#/banners/eliminar" ng-click="banners.delete($event, banner.objectId, $index)">Eliminar</a></p>
+		</li>
+
+		<a href="/#/banners/add/{{banners.brand}}/{{banners.project}}/{{banners.medio}}/id/{{banners.medioId}}">Agregar banner</a>
+	</ul>
+</div>
