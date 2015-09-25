@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate', 'checklist-model', 'ngImgCrop', 'oitozero.ngSweetAlert'])
-	.config(function ($routeProvider, RestangularProvider, PARSE) {
+	.module('app', [ 'ngCookies' , 'ngRoute', 'ui.bootstrap', 'restangular', 'ngAnimate', 'checklist-model', 'ngImgCrop', 'oitozero.ngSweetAlert', 'flow'])
+	.config(function ($routeProvider, RestangularProvider, PARSE, flowFactoryProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl: 'app/views/home.html',
@@ -29,6 +29,51 @@
 				templateUrl: 'app/views/brands/index.html',
 				controller: 'BrandsController',
 				controllerAs: 'brands'
+			})
+			.when('/projects/:brand/id/:id', {
+				templateUrl: 'app/views/projects/index.html',
+				controller: 'ProjectsController',
+				controllerAs: 'projects'
+			})
+			.when('/projects/add/:brand/id/:id', {
+				templateUrl: 'app/views/projects/add.html',
+				controller: 'ProjectsController',
+				controllerAs: 'projects'
+			})
+			.when('/projects/view/:brand/id/:id/project/:pid', {
+				templateUrl: 'app/views/projects/view.html',
+				controller: 'ProjectsController',
+				controllerAs: 'projects'
+			})
+			.when('/medios/:brand/id/:bid/:project/id/:pid', {
+				templateUrl: 'app/views/medios/index.html',
+				controller: 'MediosController',
+				controllerAs: 'medios'
+			})
+			.when('/medios/add/:brand/:project/id/:pid', {
+				templateUrl: 'app/views/medios/add.html',
+				controller: 'MediosController',
+				controllerAs: 'medios'
+			})
+			.when('/medios/view/:brand/:project/:medio/id/:mid', {
+				templateUrl: 'app/views/medios/view.html',
+				controller: 'MediosController',
+				controllerAs: 'medios'
+			})
+			.when('/banners/:brand/id/:bid/:project/id/:pid/:medio/id/:mid', {
+				templateUrl: 'app/views/banners/index.html',
+				controller: 'BannersController',
+				controllerAs: 'banners'
+			})
+			.when('/banners/add/:brand/:project/:medio/id/:mid', {
+				templateUrl: 'app/views/banners/add.html',
+				controller: 'BannersController',
+				controllerAs: 'banners'
+			})
+			.when('/banners/view/:brand/:project/:medio/:banner/id/:bnid', {
+				templateUrl: 'app/views/banners/view.html',
+				controller: 'BannersController',
+				controllerAs: 'banners'
 			})
 			.when('/users', {
 				templateUrl: 'app/views/users/index.html',

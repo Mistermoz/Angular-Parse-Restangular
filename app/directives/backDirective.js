@@ -8,8 +8,9 @@
         restrict: 'A',
         link: function (scope, elem, attrs) {
             elem.bind('click', function () {
-                if(attrs.home === true) {
+                if(attrs.home) {
                   $location.path('/');
+                  scope.$apply();
                 }else {
                   $window.history.back();
                 }

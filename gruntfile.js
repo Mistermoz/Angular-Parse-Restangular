@@ -32,7 +32,9 @@ module.exports = function (grunt) {
         'libs/checklist-model/checklist-model.js',
         'libs/ng-img-crop/compile/minified/ng-img-crop.js',
         'libs/sweetalert/dist/sweetalert.min.js',
-        'libs/ngSweetAlert/SweetAlert.min.js'
+        'libs/ngSweetAlert/SweetAlert.min.js',
+        'libs/ng-flow/dist/ng-flow-standalone.min.js',
+        'libs/jszip/dist/jszip.min.js'
       ],
       css: [
         'libs/font-awesome/css/font-awesome.min.css',

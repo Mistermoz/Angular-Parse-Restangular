@@ -3,9 +3,10 @@
 
 	angular.module('app').controller('UsersController', UsersController);
 
-	function UsersController(UserModel, BrandModel, Restangular, $cookies, $location, $rootScope, $routeParams, RoleModel) {
-		var that = this;
+	function UsersController(UserModel, BrandModel, Restangular, $cookies, $location, $rootScope, $routeParams, RoleModel, FunctionModel, SweetAlert) {
+		var that = this, ck = $cookies.get('login').split('&');
 		that.user = {};
+		that.brands = {};
 
 		that.verUser = function (e, objId) {
       $rootScope.isLoading = true;
@@ -20,6 +21,36 @@
 					that.brands = brands;
 				});
 			}
+		};
+ 
+		that.delete = function (e, objId, index) {
+			var that = this, user = {id : objId};
+			$rootScope.isLoading = true;
+
+			SweetAlert.swal({
+         title: "Estas seguro?",
+         text: "No podrás arrepentirte!",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#DD6B55",
+         confirmButtonText: "Si, eliminar!",
+         closeOnConfirm: false
+       }, function(response){ 
+        if(response) {
+          Restangular.all('functions/deleteUser').customPOST(user,false, false, {"X-Parse-Session-Token": "" + ck[0] + ""}).then(function (response) {
+					$rootScope.isLoading = false;
+					that.allUsers.splice(index, 1);
+					SweetAlert.swal("Usuario eliminado!");
+				}, function (error) {
+					console.log(error);
+					$rootScope.isLoading = false;
+				});
+        }else {
+        	$rootScope.isLoading = false;
+        }
+      });
+
+			e.preventDefault();
 		};
 
 		if($location.path() == '/users') {
@@ -38,16 +69,24 @@
 
 				if(isValid) {
 					that.user.username = that.user.name;
-					
-					UserModel.post(that.user).then(function (response) {
+					var ck = $cookies.get('login').split('&');
+					UserModel.post(that.user, false, {"X-Parse-Session-Token": "" + ck[0] + ""}).then(function (response) {
 						if(response.objectId !== null) {
 		          $rootScope.isLoading = false;
-		          $location.path('/users');
+		          Restangular.all('functions/addRoleUser').customPOST(that.user,false, false, {"X-Parse-Session-Token": "" + ck[0] + ""}).then(function (response) {
+								$rootScope.isLoading = false;
+								$location.path('/users');
+							}, function (error) {
+								console.log(error);
+								$rootScope.isLoading = false;
+							});
 		        }else {
-		          that.error('Error en envío, por favor intente nuevamente');
+		          that.error= 'Error en envío, por favor intente nuevamente';
+		          console.log(response);
 		        }
 					}, function (error) {
-						that.error('Error en envío, por favor intente nuevamente');
+						that.error = 'Error en envío, por favor intente nuevamente';
+						console.log(error);
 						$rootScope.isLoading = false;
 					});
 				}else {
@@ -73,54 +112,13 @@
 
 				if(isValid) {
 					that.user.username = that.user.name;
-
-					if(that.user.role === 'administrador') {
-
-			      RoleModel.one('itoxnE7j4Y').get().then(function (roleObejct) {
-			      	data = roleObejct;
-			      	data.users = {
-			          "__op": "AddRelation",
-			          "objects": [
-			            {
-			              "__type": "Pointer",
-			              "className": "_User",
-			              "objectId": $routeParams.objId
-			            }
-			          ]
-			      	};
-
-			      	data.put().then( function (rsp) {
-			      		console.log(rsp);
-			      	}, function (error) {
-			      		console.log(error);
-			      	});
-			      });
-					}
-					
-					// that.user.put().then(function (rsp) {
-     //          if(that.user.role === 'Administrador') {
-					// 			rel = { "users": {
-					//           "__op": "AddRelation",
-					//           "objects": [
-					//             {
-					//               "__type": "Pointer",
-					//               "className": "_User",
-					//               "objectId": $routeParams
-					//             }
-					//           ]
-					//         }
-					//       };
-
-					//       RoleModel.one('itoxnE7j4Y').get().then(function (roleObejct) {
-					//       	console.log(roleObejct);
-					//       });
-					// 		}
-
-     //          $rootScope.isLoading = false;
-     //      }, function (error) {
-     //        $rootScope.isLoading = false;
-     //        console.log(error);
-     //      });
+          Restangular.all('functions/modifyUser').customPOST(that.user,false, false, {"X-Parse-Session-Token": "" + ck[0] + ""}).then(function (response) {
+						$rootScope.isLoading = false;
+						$location.path('/users');
+					}, function (error) {
+						console.log(error);
+						$rootScope.isLoading = false;
+					});
 				}else {
 					$rootScope.isLoading = false;
 				}
