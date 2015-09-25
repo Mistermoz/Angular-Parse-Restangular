@@ -1,0 +1,18 @@
+<div class="projects index" ng-init="projects.index = true">
+	<h1>Projectos de {{projects.brand}}</h1>
+
+	<a href="/#/brands">Volver</a>
+	<ul>
+		<li ng-repeat="project in projects.allProjects">
+			<p>{{project.name}}</p>
+			<p>{{project.description}}</p>
+			<p><img ng-src="{{project.image.name}}" alt=""></p>
+			<p><a href="/#/projects/view/{{projects.brand}}/id/{{projects.brandId}}/project/{{project.objectId}}" ng-click="projects.verBrand($event, project.objectId)">Ver y Editar</a></p>
+			<p><a href="/#/projects/eliminar" ng-click="projects.delete($event, project.objectId, $index)">Eliminar</a></p>
+
+			<p><a href="/#/medios/{{projects.brand}}/id/{{projects.brandId}}/{{project.name}}/id/{{project.objectId}}">Medios de {{project.name}}</a></p>
+		</li>
+
+		<a href="/#/projects/add/{{projects.brand}}/id/{{projects.brandId}}">Agregar Projecto</a>
+	</ul>
+</div>

@@ -1,0 +1,40 @@
+<div class="projects view">
+	<h1>Editar {{projects.project}}</h1>
+	<style>
+	    .cropArea {
+	      background: #E4E4E4;
+	      overflow: hidden;
+	      width:500px;
+	      height:350px;
+	    }
+	  </style>
+	<button back>Volver</button>
+	<form name="projectForm" ng-submit="projects.edit(projectForm.$valid)" novalidate>
+		<div class="input text">
+			<input type="text" placeholder="Nombre" name="name" ng-model="projects.projView.name" required minlength="3">
+			<p ng-show="projectForm.name.$error.required && projectForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+			<p ng-show="projectForm.name.$error.minlength && projectForm.name.$touched && projectForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+
+		<div class="input text">
+			<input type="text" placeholder="Descripción" ng-model="projects.projView.description" name="description" required minlength="3">
+			<p ng-show="projectForm.description.$error.required && projectForm.$submitted" class="error">Debes ingresar una descripción.</p>
+			<p ng-show="projectForm.description.$error.minlength && projectForm.description.$touched && projectForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+
+		<div class="thumb">
+			<img ng-src="{{projects.projView.image.name}}" alt="">
+			<button ng-click="projects.editImg = true; $event.preventDefault();">Cambiar imagen</button>
+		</div>
+
+		<div class="input file" ng-show="projects.editImg">
+			<div>Elegir imagen Projecto: <input type="file" id="fileInput" name="img"/></div>
+		    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+		  </div>
+		  
+		  <div><img ng-src="{{myCroppedImage}}" /></div>
+		</div>
+
+		<input type="submit" value="Edit">
+	</form>
+</div>
