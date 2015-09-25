@@ -1,0 +1,37 @@
+<div class="medios add">
+	<h1>Agregar Medios a {{medios.project}}</h1>
+	<style>
+	    .cropArea {
+	      background: #E4E4E4;
+	      overflow: hidden;
+	      width:500px;
+	      height:350px;
+	    }
+	  </style>
+	<button back>Volver</button>
+	<form name="medioForm" ng-submit="medios.add(medioForm.$valid)" novalidate>
+		<div class="input text">
+			<input type="text" placeholder="Nombre" name="name" ng-model="medios.medioAdd.name" required minlength="3">
+			<p ng-show="medioForm.name.$error.required && medioForm.$submitted" class="error">Debes ingresar un Nombre.</p>
+			<p ng-show="medioForm.name.$error.minlength && medioForm.name.$touched && medioForm.name.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+
+		<div class="input text">
+			<input type="text" placeholder="Descripción" ng-model="medios.medioAdd.description" name="description" required minlength="3">
+			<p ng-show="medioForm.description.$error.required && medioForm.$submitted" class="error">Debes ingresar una descripción.</p>
+			<p ng-show="medioForm.description.$error.minlength && medioForm.description.$touched && medioForm.description.$error.required != true" class="error">El campo debe tener mas de 3 carácteres.</p>
+		</div>
+
+		<div class="input file">
+			<div>Elegir imagen Projecto: <input type="file" id="fileInput" name="img" valid-file ng-model="medios.medioAdd.img" required/></div>
+			<p ng-show="medioForm.img.$error.required && medioForm.$submitted" class="error">Debes ingresar una imagen.</p>
+			<div class="cropArea">
+		    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+		  </div>
+		  
+		  <div><img ng-src="{{myCroppedImage}}" /></div>
+		</div>
+
+		<input type="submit" value="Add">
+	</form>
+</div>
